@@ -1,0 +1,59 @@
+models:
+  - name: domain_profile_id_stitcher
+    model_type: id_stitcher
+    model_spec:
+      validity_time: 24h # 1 day
+      entity_key: user
+      main_id_type: main_id
+      edge_sources:
+        - input: identifies_1
+        - input: tracks_1
+        - input: product_added_1
+        - input: order_completed_1
+        - input: checkout_step_completed_1
+  - name: domain_profile
+    model_type: feature_table_model
+    model_spec:
+      validity_time: 24h # 1 day
+      id_stitching:
+        model: domain_profile_id_stitcher
+      features:
+
+# Latest Country
+        - tablevar:
+            name: max_timestamp_for_country
+            ref:
+              input: identifies_1
+            filter: properties_country is not null and properties_country != ''
+            value: max(timestamp)
+
+        - tablevar:
+            name: max_timestamp_country
+            ref:
+              input: identifies_1
+            filter: timestamp = max_timestamp_for_country and main_id is not null
+            value: max(properties_country)
+
+        - feature:
+            name: latest_country
+            value: max_timestamp_country
+
+# Latest State
+        - tablevar:
+            name: max_timestamp_for_state
+            ref:
+              input: identifies_1
+            filter: properties_state is not null and properties_state != ''
+            value: max(timestamp)
+
+        - tablevar:
+            name: max_timestamp_state
+            ref:
+              input: identifies_1
+            filter: timestamp = max_timestamp_for_state and main_id is not null
+            value: max(properties_state)
+
+        - feature:
+            name: latest_state
+            value: max_timestamp_state
+
