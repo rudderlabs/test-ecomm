@@ -26,21 +26,18 @@ models:
       features:
         - tablefeature:
             name: a_max
-            ref:
-              input: tbl_a
+            ref: input/tbl_a
             value: max(tbl_a.num_a)
         - tablevar:
             name: a_num_min
-            ref:
-              input: tbl_a
+            ref: input/tbl_a
             value: min(tbl_a.num_a)
         - feature:
             name: a_range
             value:  "{{ subtract_range('a_max', 'a_num_min') }}"
         - tablevar:
             name: c_num_max
-            ref:
-              input: tbl_c
+            ref: input/tbl_c
             value: max(tbl_c.num_c)
         - feature:
             name: c_max
