@@ -15,8 +15,7 @@ models:
     model_type: feature_table_model
     model_spec:
       validity_time: 24h # 1 day
-      id_stitching:
-        model: test_id_stitcher
+      id_stitching: model/test_id_stitcher
       macros:
         - name: subtract_range
           inputs:
