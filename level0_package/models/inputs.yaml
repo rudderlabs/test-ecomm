@@ -1,48 +1,28 @@
 inputs:
-  - name: identifies_1
-    table: ANALYTICS_DB.DATA_APPS_SIMULATED.identifies
+  - name: tbl_a
+    table: Temp_tbl_a
+    timestamp_col: insert_ts
+    ids:
+      - sql: TRIM(COALESCE(NULL, id1))
+        type: test_id
+      - sql: "id2"
+        type: test_id
+      - sql: "id3"
+        type: exclude_id
+  - name: tbl_b
+    table: Temp_tbl_b
     timestamp_col: timestamp
     ids:
-      - sql: "user_id"
-        type: user_id
-      - sql: "properties_email"
-        type: email
-      - sql: "anonymous_id"
-        type: anonymous_id
-
-  - name: tracks_1
-    table: tracks
-    timestamp_col: timestamp
+      - sql: "id1"
+        type: test_id
+      - sql: "id2"
+        type: test_id
+      - sql: "id3"
+        type: test_id
+  - name: tbl_c
+    table: Temp_tbl_c
     ids:
-      - sql: "user_id"
-        type: user_id
-      - sql: "anonymous_id"
-        type: anonymous_id
-
-  - name: checkout_steps_1
-    table: CHECKOUT_STEP_COMPLETED
-    timestamp_col: timestamp
-    ids:
-      - sql: "user_id"
-        type: user_id
-
-  - name: product_added_1
-    table: PRODUCT_ADDED
-    timestamp_col: timestamp
-    ids:
-      - sql: "user_id"
-        type: user_id
-
-  - name: order_completed_1
-    table: ORDER_COMPLETED
-    timestamp_col: timestamp
-    ids:
-      - sql: "user_id"
-        type: user_id
-
-  - name: checkout_step_completed_1
-    table: checkout_step_completed
-    timestamp_col: timestamp
-    ids:
-      - sql: "user_id"
-        type: user_id
+      - sql: "id1"
+        type: test_id
+      - sql: "id2"
+        type: test_id

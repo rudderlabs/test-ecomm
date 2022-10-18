@@ -1,55 +1,47 @@
 models:
-  - name: domain_profile_id_stitcher
+  - name: test_id_stitcher
     model_type: id_stitcher
     model_spec:
-      validity_time: 24h # 1 day
       entity_key: user
+      validity_time: 24h # 1 day
       main_id_type: main_id
+      exclude_id_types:
+        - exclude_id
       edge_sources:
-        - input/identifies_1
-        - input/tracks_1
-        - input/product_added_1
-        - input/order_completed_1
-        - input/checkout_step_completed_1
-  - name: domain_profile
+        - input: tbl_a
+        - input: tbl_b
+        - input: tbl_c
+  - name: test_feature_table
     model_type: feature_table_model
     model_spec:
       validity_time: 24h # 1 day
       id_stitching:
-        model: domain_profile_id_stitcher
+        model: test_id_stitcher
+      macros:
+        - name: subtract_range
+          inputs:
+            - a
+            - b
+          value: "{{a}} - {{b}}"
       features:
-
-# Latest Country
+        - tablefeature:
+            name: a_max
+            ref:
+              input: tbl_a
+            value: max(tbl_a.num_a)
         - tablevar:
-            name: max_timestamp_for_country
-            ref: input/identifies_1
-            filter: properties_country is not null and properties_country != ''
-            value: max(timestamp)
-
-        - tablevar:
-            name: max_timestamp_country
-            ref: input/identifies_1
-            filter: timestamp = max_timestamp_for_country and main_id is not null
-            value: max(properties_country)
-
+            name: a_num_min
+            ref:
+              input: tbl_a
+            value: min(tbl_a.num_a)
         - feature:
-            name: latest_country
-            value: max_timestamp_country
-
-# Latest State
+            name: a_range
+            value:  "{{ subtract_range('a_max', 'a_num_min') }}"
         - tablevar:
-            name: max_timestamp_for_state
-            ref: input/identifies_1
-            filter: properties_state is not null and properties_state != ''
-            value: max(timestamp)
-
-        - tablevar:
-            name: max_timestamp_state
-            ref: input/identifies_1
-            filter: timestamp = max_timestamp_for_state and main_id is not null
-            value: max(properties_state)
-
+            name: c_num_max
+            ref:
+              input: tbl_c
+            value: max(tbl_c.num_c)
         - feature:
-            name: latest_state
-            value: max_timestamp_state
-
+            name: c_max
+            value: c_num_max
