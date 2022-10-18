@@ -8,9 +8,9 @@ models:
       exclude_id_types:
         - exclude_id
       edge_sources:
-        - input: tbl_a
-        - input: tbl_b
-        - input: tbl_c
+        - input/tbl_a
+        - input/tbl_b
+        - input/tbl_c
   - name: test_feature_table
     model_type: feature_table_model
     model_spec:
