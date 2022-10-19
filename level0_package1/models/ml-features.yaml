@@ -1,0 +1,43 @@
+models:
+  - name: test_id_stitcher1
+    model_type: id_stitcher
+    model_spec:
+      entity_key: user2
+      validity_time: 24h # 1 day
+      main_id_type: main_id
+      exclude_id_types:
+        - exclude_id
+      edge_sources:
+        - input/tbl_a1
+        - input/tbl_b1
+        - input/tbl_c1
+  - name: test_feature_table1
+    model_type: feature_table_model
+    model_spec:
+      validity_time: 24h # 1 day
+      id_stitching: model/test_id_stitcher1
+      macros:
+        - name: subtract_range
+          inputs:
+            - a
+            - b
+          value: "{{a}} - {{b}}"
+      features:
+        - tablefeature:
+            name: a_max
+            ref: input/tbl_a1
+            value: max(tbl_a.num_a)
+        - tablevar:
+            name: a_num_min
+            ref: input/tbl_a1
+            value: min(tbl_a.num_a)
+        - feature:
+            name: a_range
+            value:  "{{ subtract_range('a_max', 'a_num_min') }}"
+        - tablevar:
+            name: c_num_max
+            ref: input/tbl_c1
+            value: max(tbl_c.num_c)
+        - feature:
+            name: c_max
+            value: c_num_max

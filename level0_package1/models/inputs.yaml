@@ -1,0 +1,28 @@
+inputs:
+  - name: tbl_a1
+    table: Temp_tbl_a1
+    timestamp_col: insert_ts
+    ids:
+      - sql: TRIM(COALESCE(NULL, id1))
+        type: test_id
+      - sql: "id2"
+        type: test_id
+      - sql: "id3"
+        type: exclude_id
+  - name: tbl_b1
+    table: Temp_tbl_b1
+    timestamp_col: timestamp
+    ids:
+      - sql: "id1"
+        type: test_id
+      - sql: "id2"
+        type: test_id
+      - sql: "id3"
+        type: test_id
+  - name: tbl_c1
+    table: Temp_tbl_c1
+    ids:
+      - sql: "id1"
+        type: test_id
+      - sql: "id2"
+        type: test_id
