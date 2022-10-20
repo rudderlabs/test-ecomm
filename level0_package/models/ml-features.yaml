@@ -8,14 +8,14 @@ models:
       exclude_id_types:
         - exclude_id
       edge_sources:
-        - input/tbl_a
-        - input/tbl_b
-        - input/tbl_c
+        - inputs/tbl_a
+        - inputs/tbl_b
+        - inputs/tbl_c
   - name: test_feature_table
     model_type: feature_table_model
     model_spec:
       validity_time: 24h # 1 day
-      id_stitching: model/test_id_stitcher
+      id_stitching: models/test_id_stitcher
       macros:
         - name: subtract_range
           inputs:
@@ -25,18 +25,18 @@ models:
       features:
         - tablefeature:
             name: a_max
-            ref: input/tbl_a
+            ref: inputs/tbl_a
             value: max(tbl_a.num_a)
         - tablevar:
             name: a_num_min
-            ref: input/tbl_a
+            ref: inputs/tbl_a
             value: min(tbl_a.num_a)
         - feature:
             name: a_range
             value:  "{{ subtract_range('a_max', 'a_num_min') }}"
         - tablevar:
             name: c_num_max
-            ref: input/tbl_c
+            ref: inputs/tbl_c
             value: max(tbl_c.num_c)
         - feature:
             name: c_max
