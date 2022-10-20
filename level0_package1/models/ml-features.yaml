@@ -1,5 +1,5 @@
 models:
-  - name: test_id_stitcher1
+  - name: test_id1__
     model_type: id_stitcher
     model_spec:
       entity_key: user2
@@ -11,11 +11,11 @@ models:
         - inputs/tbl_a1
         - inputs/tbl_b1
         - inputs/tbl_c1
-  - name: test_feature_table1
+  - name: test___ft1
     model_type: feature_table_model
     model_spec:
       validity_time: 24h # 1 day
-      id_stitching: models/test_id_stitcher1
+      id_stitching: models/test_id1__
       macros:
         - name: subtract_range
           inputs:
