@@ -1,5 +1,5 @@
 name: level0_package
-schema_version: 7
+schema_version: 9
 profile: test
 model_folders:
   - models
