@@ -1,0 +1,31 @@
+models:
+  - name: pkg_ft_
+    model_type: feature_table_model
+    model_spec:
+      validity_time: 24h # 1 day
+      id_stitching: models/id_stitcher
+      macros:
+        - name: subtract_range
+          inputs:
+            - a
+            - b
+          value: "{{a}} - {{b}}"
+      features:
+        - tablefeature:
+            name: a_max
+            ref: inputs/tbl_a
+            value: max(tbl_a.num_a)
+        - tablevar:
+            name: a_num_min
+            ref: inputs/tbl_a
+            value: min(tbl_a.num_a)
+        - feature:
+            name: a_range
+            value:  "{{ subtract_range('a_max', 'a_num_min') }}"
+        - tablevar:
+            name: c_num_max
+            ref: inputs/tbl_c
+            value: max(tbl_c.num_c)
+        - feature:
+            name: c_max
+            value: c_num_max

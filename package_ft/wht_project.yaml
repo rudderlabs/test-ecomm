@@ -1,0 +1,21 @@
+name: package_ft
+schema_version: 9
+profile: test
+model_folders:
+  - models
+# entities: if this is required?
+#   - name: user
+#     id_types:
+#       - name: main_id
+#       - name: test_id
+#         filters:
+#           - type: include
+#             regex: "([0-9a-z])*"
+#           - type: exclude
+#             value: ""
+#       - name: exclude_id
+packages:
+  - name: package_id_stitcher
+    gitUrl: "git@github.com:rudderlabs/test-ecomm/tree/main/package_id_stitcher"
+    mappings:
+      - models/id_stitcher: packages/package_id_stitcher/models/pkg_id_stitcher_

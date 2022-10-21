@@ -1,0 +1,13 @@
+models:
+  - name: pkg_id_stitcher_
+    model_type: id_stitcher
+    model_spec:
+      entity_key: user
+      validity_time: 24h # 1 day
+      main_id_type: main_id
+      exclude_id_types:
+        - exclude_id
+      edge_sources:
+        - inputs/tbl_a
+        - inputs/tbl_b
+        - inputs/tbl_c
