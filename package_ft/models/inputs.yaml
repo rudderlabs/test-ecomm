@@ -1,7 +1,7 @@
 inputs:
   - name: id_stitcher
     table: Temp_id_stitcher
-    valid_at_col: insert_ts
+    occurred_at_col: insert_ts
     columns:
       - main_id
       - other_id
