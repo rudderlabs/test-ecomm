@@ -1,7 +1,7 @@
 inputs:
   - name: tbl_a1
     table: Temp_tbl_a1
-    timestamp_col: insert_ts
+    valid_at_col: insert_ts
     ids:
       - sql: TRIM(COALESCE(NULL, id1))
         type: test_id
@@ -11,7 +11,7 @@ inputs:
         type: exclude_id
   - name: tbl_b1
     table: Temp_tbl_b1
-    timestamp_col: timestamp
+    valid_at_col: timestamp
     ids:
       - sql: "id1"
         type: test_id
